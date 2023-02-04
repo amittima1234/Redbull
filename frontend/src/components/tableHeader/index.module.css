@@ -1,0 +1,7 @@
+.table-header {
+  display: flex;
+}
+
+.table-header-cell {
+    display: flex;
+}

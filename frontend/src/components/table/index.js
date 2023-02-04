@@ -1,65 +1,32 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+import styles from "./index.module.css";
+import TableRow from "../tableRow"
+import TableHeader from "../tableHeader";
 
-const EditableTable = () => {
-  const [data, setData] = useState([
-    { id: 1, name: "John Doe", age: 25 },
-    { id: 2, name: "Jane Doe", age: 32 },
-    { id: 3, name: "Jim Smith", age: 40 }
-  ]);
 
-  const nameRefs = useRef([]);
-  const ageRefs = useRef([]);
+const data = [{ id: "1", component: "mosh", ip: "123.123", network: "jordan" },
+{ id: "2", component: "yos", ip: "13.23", network: "lebanon" },
+{ id: "3", component: "dos", ip: "53.223", network: "iran" },
+{ id: "4", component: "ros", ip: "68.95", network: "syria" },
+{ id: "5", component: "mos", ip: "45.74", network: "egypt" }];
 
-  const updateData = (index, field, value) => {
-    const updatedData = [...data];
-    updatedData[index][field] = value;
-    setData(updatedData);
-  };
+const headers = ["component", "ip", "network"]
 
-  const handleBlur = (index, field) => {
-    if (field === "name") {
-      updateData(index, "name", nameRefs.current[index].value);
-    } else {
-      updateData(index, "age", ageRefs.current[index].value);
-    }
-  };
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => {
-          nameRefs.current[index] = React.createRef();
-          ageRefs.current[index] = React.createRef();
-          return (
-            <tr key={item.id}>
-              <td>
-                <input
-                  type="text"
-                  ref={nameRefs.current[index]}
-                  defaultValue={item.name}
-                  onBlur={() => handleBlur(index, "name")}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  ref={ageRefs.current[index]}
-                  defaultValue={item.age}
-                  onBlur={() => handleBlur(index, "age")}
-                />
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
+const Table = () => {
+
+    return <div className={styles.table}>
+        <div className={styles["table-header"]}>
+            <TableHeader data={headers} />
+        </div>
+        <div className={styles["table-data"]}>
+            {data.map(
+                (rowData) => {
+                    return <TableRow key={rowData.id} data={rowData} />
+                })}
+        </div>
+    </div>
+
 };
 
-export default EditableTable;
+export default Table;
