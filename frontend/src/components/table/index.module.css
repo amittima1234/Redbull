@@ -1,13 +1,24 @@
 .table {
-    display: flex;
-    flex-direction: column;
+  border: 0.2em solid var(--card-border);
+  height: 15em;
+  width: 15em;
+
 }
 
 .table-header {
-    display: flex;
-    justify-content: center;
+  background: var(--active-background);
 }
 
-.table-data {
-    display: flex;
+.table-header-cell {
+  font-weight: bold;
+  border: 0;
+  padding: 0;
+}
+
+.table-data-row {
+  background: var(--secondary-active-background);
+}
+
+.table-data-cell {
+  border: 0;
 }
