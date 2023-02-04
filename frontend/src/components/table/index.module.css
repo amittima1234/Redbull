@@ -5,6 +5,7 @@
 
 .table-header {
     display: flex;
+    justify-content: center;
 }
 
 .table-data {
