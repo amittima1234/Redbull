@@ -1,4 +1,4 @@
-import "./globals.css"
+import "./globals.css";
 
 import Link from "next/link";
 
@@ -11,13 +11,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-slate-800 text-slate-100 container mx-auto p-4">
-        <main>
-          <nav>
-            <Link href="/">Home</Link>
-            <Link href="/servers">Servers</Link>
-          </nav>
-          {children}
-        </main>
+        <nav className="container mx-auto p-2">
+          <Link className="container mx-auto p-2" href="/">
+            Home
+          </Link>
+          <Link className="container mx-auto p-2" href="/servers">
+            Servers
+          </Link>
+          <Link className="container mx-auto p-2" href="/upload">
+            Upload
+          </Link>
+          <Link className="container mx-auto p-2" href="/versions">
+            Versions
+          </Link>
+        </nav>
+        <main className="container mx-auto p-1">{children}</main>
       </body>
     </html>
   );
