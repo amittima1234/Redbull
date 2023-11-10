@@ -1,8 +1,13 @@
 const express = require('express')
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
-const mongoose = require('mongoose');
 const api = require('./api')
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use("/api", api)
 
