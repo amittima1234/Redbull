@@ -1,12 +1,15 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
+import Table from "./components/Table";
+import CreateTool from "./components/CreateTool";
 
 function App() {
   return (
-    <>
+    <div>
       <NavBar />
-      <div className="text-3xl font-bold underline">hello world</div>
-    </>
+      {/* <Table /> */}
+      <CreateTool dir="rtl"/>
+    </div>
   );
 }
 
