@@ -27,6 +27,7 @@ router.post("/createEntity", async (req, res) => {
 
 router.post("/createTool", async (req, res) => {
   try {
+    console.log(req);
     const tool = await Tool.create({
       name: req.body.toolName,
       docsLink: req.body.docsLink,

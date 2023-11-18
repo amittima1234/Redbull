@@ -2,11 +2,15 @@ import React from "react";
 import { Formik, Form, Field, FieldArray } from "formik";
 import axios from "axios";
 
-export default function Test() {
+const generateUniqueKey = () => {
+  return Date.now().toString();
+};
+
+export default function CreateTool() {
   const initialValues = {
     name: "",
     link: "",
-    fields: [{ fieldName: "", fieldType: "" }],
+    fields: [{ fieldName: "", fieldType: "", key: generateUniqueKey() }],
   };
 
   // Define a validation function
@@ -21,10 +25,19 @@ export default function Test() {
   // Define a submission function
   const handleSubmit = (values) => {
     axios
-      .post("http://localhost:3000/createTool", {
-        name: values.name,
-        docsLink: values.link,
-      })
+      .post(
+        "http://localhost:3000/api/createTool",
+        {
+          toolName: values.name,
+          docsLink: values.link,
+          fields: values.fields,
+        },
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        },
+      )
       .then(function (response) {
         console.log("Form submitted:", values, "\nWith response: ", response);
       })
@@ -65,14 +78,13 @@ export default function Test() {
                 placeholder="תתעדו אותי בקונפלאונס לדורות הבאים בבקשה"
               />
             </div>
-            {console.log(values)}
 
             {/* Dynamic fields */}
             <FieldArray name="fields">
               {(arrayHelpers) => (
                 <div>
                   {values.fields.map((field, index) => (
-                    <div key={field}>
+                    <div key={`${field.key}`}>
                       <label htmlFor={`fields.${index}.fieldName`}>
                         שם השדה:
                       </label>
@@ -108,7 +120,11 @@ export default function Test() {
                   <button
                     type="button"
                     onClick={() =>
-                      arrayHelpers.push({ fieldName: "", fieldType: "" })
+                      arrayHelpers.push({
+                        fieldName: "",
+                        fieldType: "",
+                        key: generateUniqueKey(),
+                      })
                     }
                   >
                     הוספת שדה
