@@ -30,6 +30,7 @@ router.post("/createTool", async (req, res) => {
     const tool = await Tool.create({
       name: req.body.toolName,
       docsLink: req.body.docsLink,
+      fields: req.body.fields,
     });
     await tool.save();
     res.status(200).send("Tool created successfully!👌");

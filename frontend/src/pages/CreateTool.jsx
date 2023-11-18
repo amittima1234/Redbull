@@ -1,11 +1,11 @@
 import React from "react";
 import { Formik, Form, Field, FieldArray } from "formik";
+import axios from "axios";
 
 export default function Test() {
-  // Define an initial form values object
   const initialValues = {
-    name: "משהו מסווג",
-    link: "תתעדו אותי בקונפלאונס לדורות הבאים בבקשה",
+    name: "",
+    link: "",
     fields: [{ fieldName: "", fieldType: "" }],
   };
 
@@ -20,8 +20,17 @@ export default function Test() {
 
   // Define a submission function
   const handleSubmit = (values) => {
-    // Handle form submission logic here
-    console.log("Form submitted:", values);
+    axios
+      .post("http://localhost:3000/createTool", {
+        name: values.name,
+        docsLink: values.link,
+      })
+      .then(function (response) {
+        console.log("Form submitted:", values, "\nWith response: ", response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -37,7 +46,13 @@ export default function Test() {
             {/* Permanent fields */}
             <div>
               <label htmlFor="name">שם התכולה:</label>
-              <Field type="text" id="name" name="name" value="משהו מסווג" />
+              <Field
+                type="text"
+                id="name"
+                name="name"
+                autoComplete="on"
+                placeholder="משהו מסווג"
+              />
             </div>
 
             <div>
@@ -46,16 +61,18 @@ export default function Test() {
                 type="text"
                 id="link"
                 name="link"
-                value="תתעדו אותי בקונפלאונס לדורות הבאים בבקשה"
+                autoComplete="url"
+                placeholder="תתעדו אותי בקונפלאונס לדורות הבאים בבקשה"
               />
             </div>
+            {console.log(values)}
 
             {/* Dynamic fields */}
             <FieldArray name="fields">
               {(arrayHelpers) => (
                 <div>
                   {values.fields.map((field, index) => (
-                    <div key={index}>
+                    <div key={field}>
                       <label htmlFor={`fields.${index}.fieldName`}>
                         שם השדה:
                       </label>
@@ -63,6 +80,7 @@ export default function Test() {
                         type="text"
                         id={`fields.${index}.fieldName`}
                         name={`fields.${index}.fieldName`}
+                        autoComplete="on"
                       />
 
                       <label htmlFor={`fields.${index}.fieldType`}>

@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
 import {
   faPenToSquare,
   faTableList,
@@ -21,9 +22,9 @@ export default function NavBar() {
               icon={faPenToSquare}
               style={{ color: "#fff" }}
             />
-            <a className="text-white" href="addEntity">
+            <NavLink className="text-white" to={"CreateEntity"}>
               הוספת רשומה
-            </a>
+            </NavLink>
           </button>
         </li>
         <li className="m-1.5">
@@ -33,9 +34,9 @@ export default function NavBar() {
               icon={faToolbox}
               style={{ color: "#fff" }}
             />
-            <a className="text-white" href="addTool">
+            <NavLink className="text-white" to={"CreateTool"}>
               הוספת תכולה
-            </a>
+            </NavLink>
           </button>
         </li>
         <li className="m-1.5">
@@ -45,9 +46,9 @@ export default function NavBar() {
               icon={faTableList}
               style={{ color: "#fff" }}
             />
-            <a className="text-white" href="table">
+            <NavLink className="text-white" to={"/"}>
               טבלה
-            </a>
+            </NavLink>
           </button>
         </li>
       </ol>
