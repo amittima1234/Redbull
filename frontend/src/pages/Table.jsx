@@ -22,9 +22,9 @@ export default function Table() {
       });
   }, []);
 
-  const getEntitiesOfToolbar = (toolID) => {
-    
-  }
+  const getEntitiesOfTool = async (toolID) => {
+
+  };
 
   return (
     <div>
@@ -36,8 +36,9 @@ export default function Table() {
             <table key={tool.name} className="table-auto">
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>mosh</th>
+                  {tool.fields.map(({ fieldName }) => {
+                    return <th>{fieldName}</th>;
+                  })}
                 </tr>
               </thead>
               <tbody>
